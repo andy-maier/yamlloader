@@ -6,13 +6,13 @@ import yaml
 
 from collections import OrderedDict
 
-import yamlloader.settings
+from .. import settings
 
 __all__ = []
 
 
 def construct_yaml_map(self, node):
-    if yamlloader.settings.PY_LE_36:
+    if settings.PY_LE_36:
         data = OrderedDict()
     else:
         data = dict()
@@ -28,7 +28,7 @@ def construct_mapping(self, node, deep=False):
         msg = 'Expected a mapping node, but found {}'.format(node.id)
         raise yaml.constructor.ConstructError(None, None, msg, node.start_mark)
 
-    if yamlloader.settings.PY_LE_36:
+    if settings.PY_LE_36:
         mapping = OrderedDict()
     else:
         mapping = dict()
@@ -64,7 +64,7 @@ class SafeLoader(OrderedLoaderMixin, yaml.SafeLoader):
     pass
 
 
-if not hasattr(yaml, 'CLoader') and yamlloader.settings.ALLOW_NON_C_FALLBACK:
+if not hasattr(yaml, 'CLoader') and settings.ALLOW_NON_C_FALLBACK:
     yaml.CLoader = yaml.Loader
 
 
@@ -72,7 +72,7 @@ class CLoader(OrderedLoaderMixin, yaml.CLoader):
     pass
 
 
-if not hasattr(yaml, 'CSafeLoader') and yamlloader.settings.ALLOW_NON_C_FALLBACK:
+if not hasattr(yaml, 'CSafeLoader') and settings.ALLOW_NON_C_FALLBACK:
     yaml.CSafeLoader = yaml.SafeLoader
 
 

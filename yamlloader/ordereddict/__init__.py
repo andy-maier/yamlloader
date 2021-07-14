@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """YAML loaders and dumpers for PyYAML allowing to keep keys order."""
 from __future__ import print_function, division, absolute_import
 
